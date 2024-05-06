@@ -80,5 +80,5 @@ do {
 console.log(`	Média de salários: R$ ${somaSalario/contador};
 	Média do número de filhos: ${somaFilhos/contador};
 	Maior salário: R$ ${maiorSalario};
-	Percentual de pessoas com salário abaixo de R$ 350: ${contadorSalarioAbaixo350/contador*100}%.`)
+	Percentual de pessoas com salário abaixo de R$ 350: ${contadorSalarioAbaixo350/contador*100..toFixed(3)}%.`)
 
