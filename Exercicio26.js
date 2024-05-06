@@ -53,10 +53,10 @@ const COLUNAS = 3;
 const MATRIZ = criarMatriz(LINHAS, COLUNAS);
 const MATRIZ2 = criarMatriz(LINHAS, COLUNAS);
 
-let resultado = multiplicarMatrizes(MATRIZ, MATRIZ2);
+const RESULTADOMULTIPLICACAOMATRIZ = multiplicarMatrizes(MATRIZ, MATRIZ2);
 
 imprimirMatriz(MATRIZ);
 console.log("\n");
 imprimirMatriz(MATRIZ2);
 console.log("\n");
-imprimirMatriz(resultado);
+imprimirMatriz(RESULTADOMULTIPLICACAOMATRIZ);
