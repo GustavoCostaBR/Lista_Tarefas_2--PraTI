@@ -5,7 +5,7 @@
 			"type": "node",
 			"name": "Run Current File",
 			"request": "launch",
-			"program": "${workspaceFolder}\\Exercicio19.js",
+			"program": "${workspaceFolder}\\Exercicio27.js",
 			"console": "integratedTerminal"
 		}
 	]

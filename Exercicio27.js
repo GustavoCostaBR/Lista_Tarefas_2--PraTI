@@ -1,3 +1,5 @@
+const prompt = require('prompt-sync')();
+
 function imprimirMatriz(matriz) {
 	for (let i = 0; i < matriz.length; i++) {
 		console.log(matriz[i].join('	'));
@@ -26,42 +28,28 @@ function receberEntradaInteira(mensagem, limite) {
 	return inteiro;
 }
 
-function criarMatriz(linhas, colunas) {
+function criarMatriz2(linhas, colunas) {
 	const matriz = [];
 	for (let i = 0; i < linhas; i++) {
 		matriz[i] = [];
 		for (let j = 0; j < colunas; j++) {
-			matriz[i][j] = numeroAleatorio();
+			matriz[i][j] = receberEntradaInteira(`Informe um inteiro para a posição ${i}, ${j}: `);
 		}
 	}
 	return matriz;
 }
 
-function multiplicarMatrizes(matrizA, matrizB) {
+function multiplicarMatrizPorInteiro(matrizA, inteiro) {
 	let linhasA = matrizA.length;
 	let colunasA = matrizA[0].length;
-	let linhasB = matrizB.length;
-	let colunasB = matrizB[0].length;
-
-	if (colunasA !== linhasB) {
-		console.error("As dimensões das matrizes não são compatíveis para a multiplicação.");
-		return;
-	}
-
-	let resultado = [];
-	for (let i = 0; i < linhasA; i++) {
-		resultado[i] = new Array(colunasB).fill(0);
-	}
+	let vetor = [];
 
 	for (let i = 0; i < linhasA; i++) {
-		for (let j = 0; j < colunasB; j++) {
-			for (let k = 0; k < colunasA; k++) {
-				resultado[i][j] += matrizA[i][k] * matrizB[k][j];
-			}
+		for (let j = 0; j < colunasA; j++) {
+			vetor.push(matrizA[i][j]*inteiro);
 		}
 	}
-
-	return resultado;
+	return vetor;
 }
 
 
@@ -69,16 +57,16 @@ function numeroAleatorio() {
 	return Math.floor(Math.random() * 21) - 10; // Gera números entre -10 e 10
 }
 
-const LINHAS = 3;
-const COLUNAS = 3;
+const LINHAS = 6;
+const COLUNAS = 6;
 
-const MATRIZ = criarMatriz(LINHAS, COLUNAS);
-const MATRIZ2 = criarMatriz(LINHAS, COLUNAS);
+const MATRIZ = criarMatriz2(LINHAS, COLUNAS);
+const VALOR_A = receberEntradaInteira("Informe o valor A pelo qual a matriz deve ser multiplicada: ")
+const VETOR = multiplicarMatrizPorInteiro(MATRIZ, VALOR_A);
 
-const RESULTADOMULTIPLICACAOMATRIZ = multiplicarMatrizes(MATRIZ, MATRIZ2);
 
 imprimirMatriz(MATRIZ);
 console.log("\n");
-imprimirMatriz(MATRIZ2);
+console.log(VALOR_A);
 console.log("\n");
-imprimirMatriz(RESULTADOMULTIPLICACAOMATRIZ);
+console.log(VETOR);
