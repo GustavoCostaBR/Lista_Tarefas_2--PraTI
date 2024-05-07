@@ -9,13 +9,17 @@ function receberEntradaInteira(mensagem) {
 			console.log("Informe um número inteiro, positivo válido! (somente a parte inteira será considerada)");
 			inteiro = "a";
 		}
-		if (inteiro < 0){
+		if (inteiro < 0) {
 			console.log("Informe um número inteiro, positivo válido! (somente a parte inteira será considerada)");
 			inteiro = "a";
 		}
+		else if (isNaN(inteiro)) {
+			inteiro = "a";
+			console.log("Informe um número inteiro, positivo válido!");
+		}
 
 	} while (inteiro == "a");
-	 return inteiro;
+	return inteiro;
 }
 
 const PRECOKM1 = 0.5;

@@ -1,17 +1,17 @@
 const prompt = require('prompt-sync')();
-function validarHorario(stringHorario){
+function validarHorario(stringHorario) {
 	condition = false;
 	try {
 		horarioEmLista = stringHorario.split(".");
-		if(horarioEmLista[0] > 23 || horarioEmLista[0] < 0) {
+		if (horarioEmLista[0] > 23 || horarioEmLista[0] < 0) {
 			condition = true;
 			console.log("Erro: informe um horário válido! A hora deve ser maior ou igual a 0 e menor que 24!");
 		}
-		else if(horarioEmLista[1] >= 60 || horarioEmLista[1] < 0) {
+		else if (horarioEmLista[1] >= 60 || horarioEmLista[1] < 0) {
 			condition = true;
 			console.log("Erro: informe um horário válido! O minuto deve ser maior ou igual a 0 e menor que 60!");
 		}
-		else if(horarioEmLista[0] >= 60 && horarioEmLista[2] < 0) {
+		else if (horarioEmLista[0] >= 60 && horarioEmLista[2] < 0) {
 			condition = true;
 			console.log("Erro: informe um horário válido! O segundo deve ser maior ou igual a 0 e menor que 60!");
 		}
@@ -22,7 +22,7 @@ function validarHorario(stringHorario){
 	return condition;
 }
 
-function receberHorario(){
+function receberHorario() {
 	let horario = new Date();
 	let stringHorario;
 	let condition = false;

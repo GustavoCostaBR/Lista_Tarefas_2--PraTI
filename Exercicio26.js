@@ -21,6 +21,10 @@ function receberEntradaInteira(mensagem, limite) {
 			console.log("Informe um número inteiro, positivo válido menor ou igual a " + limite + "!");
 			inteiro = "a";
 		}
+		else if (isNaN(inteiro)) {
+			inteiro = "a";
+			console.log("Informe um número inteiro, positivo válido menor ou igual a " + limite + "!");
+		}
 
 	} while (inteiro == "a");
 	return inteiro;

@@ -15,12 +15,12 @@ function criarMatriz(linhas, colunas) {
 	return matriz;
 }
 
-function criarVetorContadorNegativos(matriz){
+function criarVetorContadorNegativos(matriz) {
 	const VETOR = [];
 	for (let i = 0; i < matriz.length; i++) {
 		VETOR[i] = 0;
 		for (let j = 0; j < matriz[i].length; j++) {
-			if (matriz[i][j] < 0){
+			if (matriz[i][j] < 0) {
 				VETOR[i]++;
 			}
 		}

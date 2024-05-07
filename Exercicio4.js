@@ -8,20 +8,24 @@ function receberEntradaDecimal(mensagem) {
 			console.log("Informe um número decimal, positivo válido!");
 			decimal = "a";
 		}
-		if (decimal < 0){
+		if (decimal < 0) {
 			console.log("Informe um número decimal, positivo válido!");
 			decimal = "a";
 		}
+		else if (isNaN(decimal)) {
+			decimal = "a";
+			console.log("Informe um número decimal válido!");
+		}
 
 	} while (decimal == "a");
-	 return decimal;
+	return decimal;
 }
 
 let segmento1 = receberEntradaDecimal("Informe o tamanho do primeiro seguimento de reta!");
 let segmento2 = receberEntradaDecimal("Informe o tamanho do segundo seguimento de reta!");
 let segmento3 = receberEntradaDecimal("Informe o tamanho do terceiro seguimento de reta!");
 
-if ((segmento1+segmento2) > segmento3 && (segmento3+segmento2) > segmento1 && (segmento1+segmento3) > segmento2) {
+if ((segmento1 + segmento2) > segmento3 && (segmento3 + segmento2) > segmento1 && (segmento1 + segmento3) > segmento2) {
 	console.log("É possível formar um triânmgulo!");
 }
 else {

@@ -23,6 +23,10 @@ function receberEntradaInteira(mensagem, limite) {
 			console.log("Informe um número inteiro, positivo válido menor ou igual a " + limite + "!");
 			inteiro = "a";
 		}
+		else if (isNaN(inteiro)) {
+			inteiro = "a";
+			console.log("Informe um número inteiro, positivo válido menor ou igual a " + limite + "!");
+		}
 
 	} while (inteiro == "a");
 	return inteiro;
@@ -46,7 +50,7 @@ function multiplicarMatrizPorInteiro(matrizA, inteiro) {
 
 	for (let i = 0; i < linhasA; i++) {
 		for (let j = 0; j < colunasA; j++) {
-			vetor.push(matrizA[i][j]*inteiro);
+			vetor.push(matrizA[i][j] * inteiro);
 		}
 	}
 	return vetor;

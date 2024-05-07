@@ -1,7 +1,7 @@
 const prompt = require('prompt-sync')();
 
 function receberEntradaInteira(mensagem, limite) {
-	if (limite == undefined){
+	if (limite == undefined) {
 		limite = Number.MAX_SAFE_INTEGER;
 	}
 	let inteiro = "a";
@@ -12,17 +12,21 @@ function receberEntradaInteira(mensagem, limite) {
 			console.log("Informe um número inteiro, positivo válido! (somente a parte inteira será considerada)");
 			inteiro = "a";
 		}
-		if (inteiro < 0){
+		if (inteiro < 0) {
 			console.log("Informe um número inteiro, positivo válido! (somente a parte inteira será considerada)");
 			inteiro = "a";
 		}
-		else if (inteiro > limite){
+		else if (inteiro > limite) {
 			console.log("Informe um número inteiro, positivo válido menor ou igual a " + limite + "!");
 			inteiro = "a";
 		}
+		else if (isNaN(inteiro)) {
+			inteiro = "a";
+			console.log("Informe um número inteiro, positivo válido menor ou igual a " + limite + "!");
+		}
 
 	} while (inteiro == "a");
-	 return inteiro;
+	return inteiro;
 }
 
 const PONTOSPORHORA10 = 2;
@@ -34,10 +38,10 @@ let horasAtividade = receberEntradaInteira("Diga quantas horas de atividade fís
 let pontos;
 let valorAReceber;
 
-if (horasAtividade <= 10){
+if (horasAtividade <= 10) {
 	pontos = PONTOSPORHORA10 * horasAtividade;
 }
-else if (horasAtividade <= 20){
+else if (horasAtividade <= 20) {
 	pontos = PONTOSPORHORA20 * horasAtividade;
 }
 else {

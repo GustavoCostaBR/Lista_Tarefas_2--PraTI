@@ -8,13 +8,17 @@ function receberEntradaDecimal(mensagem) {
 			console.log("Informe um número decimal, positivo válido!");
 			decimal = "a";
 		}
-		if (decimal < 0){
+		if (decimal < 0) {
 			console.log("Informe um número decimal, positivo válido!");
 			decimal = "a";
 		}
+		else if (isNaN(decimal)) {
+			decimal = "a";
+			console.log("Informe um número decimal válido!");
+		}
 
 	} while (decimal == "a");
-	 return decimal;
+	return decimal;
 }
 
 let funcionario = {}

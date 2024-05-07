@@ -1,14 +1,14 @@
 const prompt = require('prompt-sync')();
 
-function imprimirOpcoes(...opcoes){
+function imprimirOpcoes(...opcoes) {
 	console.log("Selecione uma das opções abaixo, informe somente o número!");
-	for (let i = 0; i < opcoes.length ; i++){
-		console.log(i +"- " + opcoes[i]);
+	for (let i = 0; i < opcoes.length; i++) {
+		console.log(i + "- " + opcoes[i]);
 	}
 }
 
 function receberEntradaInteira(mensagem, limite) {
-	if (limite == undefined){
+	if (limite == undefined) {
 		limite = Number.MAX_SAFE_INTEGER;
 	}
 	let inteiro = "a";
@@ -19,17 +19,21 @@ function receberEntradaInteira(mensagem, limite) {
 			console.log("Informe um número inteiro, positivo válido! (somente a parte inteira será considerada)");
 			inteiro = "a";
 		}
-		if (inteiro < 0){
+		if (inteiro < 0) {
 			console.log("Informe um número inteiro, positivo válido! (somente a parte inteira será considerada)");
 			inteiro = "a";
 		}
-		else if (inteiro > limite){
+		else if (inteiro > limite) {
 			console.log("Informe um número inteiro, positivo válido menor ou igual a " + limite + "!");
 			inteiro = "a";
 		}
+		else if (isNaN(inteiro)) {
+			inteiro = "a";
+			console.log("Informe um número inteiro, positivo válido menor ou igual a " + limite + "!");
+		}
 
 	} while (inteiro == "a");
-	 return inteiro;
+	return inteiro;
 }
 
 const CARROPOPULAR = "Carro popular";
@@ -47,8 +51,8 @@ let diasAluguel = receberEntradaInteira("Informe por quantos dias o carro foi al
 
 let preco;
 
-if (tipoCarro == 0){
-	if (kmPercorridos <= 200){
+if (tipoCarro == 0) {
+	if (kmPercorridos <= 200) {
 		preco = diasAluguel * 150 + kmPercorridos * PRECOKMCARROLUXO1;
 	}
 	else {
@@ -56,7 +60,7 @@ if (tipoCarro == 0){
 	}
 }
 else {
-	if (kmPercorridos <= 100){
+	if (kmPercorridos <= 100) {
 		preco = diasAluguel * 90 + kmPercorridos * PRECOKMCARROPOPULAR1;
 	}
 	else {

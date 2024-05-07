@@ -15,7 +15,7 @@ function criarMatriz(linhas, colunas) {
 	return matriz;
 }
 
-function criarVetorSomadorColunas(matriz){
+function criarVetorSomadorColunas(matriz) {
 	const VETOR = [];
 	for (let i = 0; i < matriz[0].length; i++) {
 		VETOR[i] = 0;

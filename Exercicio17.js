@@ -8,8 +8,8 @@ for (let index = 0; index < 9; index++) {
 }
 let contador = 0;
 for (let index = 0; index < 9; index++) {
-	if (listaIdade[index] < 18){
-		if (contador == 0){
+	if (listaIdade[index] < 18) {
+		if (contador == 0) {
 			console.log("\n\nDados das pessoas menores de idade:\n");
 			contador++;
 		}

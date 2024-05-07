@@ -9,24 +9,27 @@ function receberEntradaDecimal(mensagem) {
 			console.log("Informe um número decimal, positivo válido!");
 			decimal = "a";
 		}
-		if (decimal < 0){
+		if (decimal < 0) {
 			console.log("Informe um número decimal, positivo válido!");
 			decimal = "a";
+		} else if (isNaN(decimal)) {
+			decimal = "a";
+			console.log("Informe um número decimal, positivo válido!");
 		}
 
 	} while (decimal == "a");
-	 return decimal;
+	return decimal;
 }
 
-function imprimirOpcoes(mensagem, ...opcoes){
+function imprimirOpcoes(mensagem, ...opcoes) {
 	console.log(mensagem);
-	for (let i = 0; i < opcoes.length ; i++){
-		console.log(i +"- " + opcoes[i]);
+	for (let i = 0; i < opcoes.length; i++) {
+		console.log(i + "- " + opcoes[i]);
 	}
 }
 
 function receberEntradaInteira(mensagem, limite) {
-	if (limite == undefined){
+	if (limite == undefined) {
 		limite = Number.MAX_SAFE_INTEGER;
 	}
 	let inteiro = "a";
@@ -37,17 +40,21 @@ function receberEntradaInteira(mensagem, limite) {
 			console.log("Informe um número inteiro, positivo válido! (somente a parte inteira será considerada)");
 			inteiro = "a";
 		}
-		if (inteiro < 0){
+		if (inteiro < 0) {
 			console.log("Informe um número inteiro, positivo válido! (somente a parte inteira será considerada)");
 			inteiro = "a";
 		}
-		else if (inteiro > limite){
+		else if (inteiro > limite) {
 			console.log("Informe um número inteiro, positivo válido menor ou igual a " + limite + "!");
 			inteiro = "a";
 		}
+		else if (isNaN(inteiro)) {
+			inteiro = "a";
+			console.log("Informe um número inteiro, positivo válido menor ou igual a " + limite + "!");
+		}
 
 	} while (inteiro == "a");
-	 return inteiro;
+	return inteiro;
 }
 
 const MASCULINO = "Masculino";

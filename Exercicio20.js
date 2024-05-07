@@ -1,9 +1,9 @@
 const prompt = require('prompt-sync')();
 
-function imprimirOpcoes2(mensagem, ...opcoes){
+function imprimirOpcoes2(mensagem, ...opcoes) {
 	console.log(mensagem);
-	for (let i = 0; i < opcoes.length ; i++){
-		console.log(i +"- " + opcoes[i]);
+	for (let i = 0; i < opcoes.length; i++) {
+		console.log(i + "- " + opcoes[i]);
 	}
 }
 
@@ -16,17 +16,17 @@ function receberEntradaDecimal(mensagem) {
 			console.log("Informe um número decimal, positivo válido!");
 			decimal = "a";
 		}
-		if (decimal < 0){
+		if (decimal < 0) {
 			console.log("Informe um número decimal, positivo válido!");
 			decimal = "a";
 		}
 
 	} while (decimal == "a");
-	 return decimal;
+	return decimal;
 }
 
 function receberEntradaInteira(mensagem, limite) {
-	if (limite == undefined){
+	if (limite == undefined) {
 		limite = Number.MAX_SAFE_INTEGER;
 	}
 	let inteiro = "a";
@@ -37,17 +37,21 @@ function receberEntradaInteira(mensagem, limite) {
 			console.log("Informe um número inteiro, positivo válido! (somente a parte inteira será considerada)");
 			inteiro = "a";
 		}
-		if (inteiro < 0){
+		if (inteiro < 0) {
 			console.log("Informe um número inteiro, positivo válido! (somente a parte inteira será considerada)");
 			inteiro = "a";
 		}
-		else if (inteiro > limite){
+		else if (inteiro > limite) {
 			console.log("Informe um número inteiro, positivo válido menor ou igual a " + limite + "!");
 			inteiro = "a";
 		}
+		else if (isNaN(inteiro)) {
+			inteiro = "a";
+			console.log("Informe um número inteiro, positivo válido menor ou igual a " + limite + "!");
+		}
 
 	} while (inteiro == "a");
-	 return inteiro;
+	return inteiro;
 }
 
 let listaFuncionarios = [];
@@ -63,7 +67,7 @@ do {
 	funcionario.inss = funcionario.salario * 0.12;
 	funcionario.salarioLiquido = funcionario.salario - funcionario.inss;
 	imprimirOpcoes2("Deseja continuar? Informe somente o número!", SIM, NAO);
-	if (receberEntradaInteira("Entrada: ", 1) == 1){
+	if (receberEntradaInteira("Entrada: ", 1) == 1) {
 		continuar = false;
 	}
 	listaFuncionarios.push(funcionario);

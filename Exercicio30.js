@@ -54,12 +54,12 @@ function calcularSomas(matriz) {
 	let SC = [];
 
 	for (let i = 0; i < matriz.length; i++) {
-		SL.push(somaLinha(matriz, i+1));
+		SL.push(somaLinha(matriz, i + 1));
 	}
 
 	// Calcular as somas das colunas
 	for (let j = 0; j < matriz[0].length; j++) {
-		SC.push(somaColuna(matriz, j+1));
+		SC.push(somaColuna(matriz, j + 1));
 	}
 
 	return [SL, SC];

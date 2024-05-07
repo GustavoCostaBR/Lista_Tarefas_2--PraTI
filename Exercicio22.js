@@ -1,9 +1,9 @@
 const prompt = require('prompt-sync')();
 
-function imprimirOpcoes2(mensagem, ...opcoes){
+function imprimirOpcoes2(mensagem, ...opcoes) {
 	console.log(mensagem);
-	for (let i = 0; i < opcoes.length ; i++){
-		console.log(i +"- " + opcoes[i]);
+	for (let i = 0; i < opcoes.length; i++) {
+		console.log(i + "- " + opcoes[i]);
 	}
 }
 
@@ -16,17 +16,21 @@ function receberEntradaDecimal(mensagem) {
 			console.log("Informe um número decimal, positivo válido!");
 			decimal = "a";
 		}
-		if (decimal < 0){
+		if (decimal < 0) {
 			console.log("Informe um número decimal, positivo válido!");
 			decimal = "a";
 		}
+		else if (isNaN(decimal)) {
+			decimal = "a";
+			console.log("Informe um número decimal válido!");
+		}
 
 	} while (decimal == "a");
-	 return decimal;
+	return decimal;
 }
 
 function receberEntradaInteira(mensagem, limite) {
-	if (limite == undefined){
+	if (limite == undefined) {
 		limite = Number.MAX_SAFE_INTEGER;
 	}
 	let inteiro = "a";
@@ -37,17 +41,21 @@ function receberEntradaInteira(mensagem, limite) {
 			console.log("Informe um número inteiro, positivo válido! (somente a parte inteira será considerada)");
 			inteiro = "a";
 		}
-		if (inteiro < 0){
+		if (inteiro < 0) {
 			console.log("Informe um número inteiro, positivo válido! (somente a parte inteira será considerada)");
 			inteiro = "a";
 		}
-		else if (inteiro > limite){
+		else if (inteiro > limite) {
 			console.log("Informe um número inteiro, positivo válido menor ou igual a " + limite + "!");
 			inteiro = "a";
 		}
+		else if (isNaN(inteiro)) {
+			inteiro = "a";
+			console.log("Informe um número inteiro, positivo válido menor ou igual a " + limite + "!");
+		}
 
 	} while (inteiro == "a");
-	 return inteiro;
+	return inteiro;
 }
 
 let continuar = true;
@@ -63,7 +71,7 @@ do {
 	let salario = receberEntradaDecimal("Informe o salário: ");
 	let filhos = receberEntradaInteira("Informe o número de filhos: ");
 	imprimirOpcoes2("Deseja continuar? Informe somente o número!", SIM, NAO);
-	if (receberEntradaInteira("Entrada: ", 1) == 1){
+	if (receberEntradaInteira("Entrada: ", 1) == 1) {
 		continuar = false;
 	}
 	somaFilhos += filhos;
@@ -77,8 +85,8 @@ do {
 	contador++;
 } while (continuar);
 
-console.log(`	Média de salários: R$ ${somaSalario/contador};
-	Média do número de filhos: ${somaFilhos/contador};
+console.log(`	Média de salários: R$ ${somaSalario / contador};
+	Média do número de filhos: ${somaFilhos / contador};
 	Maior salário: R$ ${maiorSalario};
-	Percentual de pessoas com salário abaixo de R$ 350: ${contadorSalarioAbaixo350/contador*100..toFixed(3)}%.`)
+	Percentual de pessoas com salário abaixo de R$ 350: ${contadorSalarioAbaixo350 / contador * 100..toFixed(3)}%.`)
 
