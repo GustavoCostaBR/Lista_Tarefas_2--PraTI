@@ -1,5 +1,6 @@
 class Hotel {
 	static hoteis = [];
+	static contadorIds = 0;
 
 	constructor(id, nome, cidade, quartosTotais) {
 		this.id = id;
@@ -12,96 +13,147 @@ class Hotel {
 }
 
 class Reserva {
-	static reservas = [];
-	constructor(idReserva, idHotel, nomeCliente) {
-		this.idReserva = idReserva;
+	// static reservas = [];
+	static contadorIds = 0;
+	constructor(id, idHotel, nomeCliente) {
+		this.id = id;
 		this.idHotel = idHotel;
 		this.nomeCliente = nomeCliente;
 	}
 }
 
-function adicionarHotel(id, nome, cidade, quartosTotais) {
+const encontrarHotelPorId = (id) => Hotel.hoteis.find(hotel => hotel.id === id);
+const encontrarReservaPorId = (id) => {
+	for (const hotel of Hotel.hoteis) {
+		for (const reserva of hotel.reservas) {
+			if (id === reserva.id) {
+				return reserva;
+			}
+		}
+	}
+	return false;
+}
+
+function adicionarHotel(nome, cidade, quartosTotais) {
+	let id;
+	if (Hotel.contadorIds >= 0) {
+		id = Hotel.contadorIds++;
+	}
+
 	const hotel = new Hotel(id, nome, cidade, quartosTotais);
 	Hotel.hoteis.push(hotel);
+	return id;
 }
 
 function buscarHoteisPorCidade(cidade) {
 	return Hotel.hoteis.filter(hotel => hotel.cidade === cidade);
 }
 
-function listarVagasDisponiveisCidade(cidade){
+function listarVagasDisponiveisCidade(cidade) {
 	let hoteis = buscarHoteisPorCidade(cidade);
 	for (const hotel of hoteis) {
-		console.log(hotel.nome + " tem " + listarVagasDisponiveisHotel(hotel) + " vagas disponíveis!" );
+		console.log(hotel.nome + " localizado na cidade " + cidade + " tem " + listarVagasDisponiveisHotel(hotel) + " vagas disponíveis!");
 	}
 }
 
-function listarVagasDisponiveisHotel(hotel){
+function listarVagasDisponiveisHotel(hotel) {
 	return hotel.quartosDisponiveis;
 }
 
-function fazerReserva(idReserva, idHotel, nomeCliente) {
-	const hotel = Hotel.hoteis.find(hotel => hotel.id === idHotel);
+function fazerReserva(idHotel, nomeCliente) {
+	const hotel = encontrarHotelPorId(idHotel);
 	if (hotel && hotel.quartosDisponiveis > 0) {
 		hotel.quartosDisponiveis--;
+
+		if (Reserva.contadorIds >= 0) {
+			idReserva = Reserva.contadorIds++;
+		}
+
 		const reserva = new Reserva(idReserva, idHotel, nomeCliente);
-		Reserva.reservas.push(reserva);
-		console.log(`Reserva de ID ${reserva.idReserva} no hotel de ID ${hotel.id} realizada com sucesso!`);
-		return true;
+		hotel.reservas.push(reserva);
+		// Reserva.reservas.push(reserva);
+		console.log(`Reserva de ID ${reserva.id} no hotel ${hotel.nome} (ID=${hotel.id}) realizada com sucesso!`);
+		return idReserva;
 	}
-	console.log(`Reserva de ID ${idReserva} no hotel de ID ${idHotel} foi recusada!`)
+
+	console.log(`Reserva no hotel ${hotel.nome} (ID=${hotel.id}) foi recusada!`)
 	if (hotel) {
 		console.log(`Número de vagas igual a ${hotel.quartosDisponiveis}!`);
+	}
+	else {
+		console.log(`Hotel não existe!`);
 	}
 	return false;
 }
 
 function cancelarReserva(idReserva) {
-	const reservaIndex = Reserva.reservas.findIndex(reserva => reserva.idReserva === idReserva);
-	if (reservaIndex !== -1) {
-		const reserva = Reserva.reservas[reservaIndex];
-		const hotel = Hotel.hoteis.find(hotel => hotel.id === reserva.idHotel);
-		hotel.quartosDisponiveis++;
-		Reserva.reservas.splice(reservaIndex, 1);
-		return true;
+	// const reservaIndex = Reserva.reservas.findIndex(reserva => reserva.idReserva === idReserva);
+	let reserva = encontrarReservaPorId(idReserva);
+	if (reserva != false) {
+		let hotel = encontrarHotelPorId(reserva.idHotel);
+		const reservaIndex = hotel.reservas.findIndex(reserva => reserva.id === idReserva);
+		if (reservaIndex !== -1) {
+			hotel.quartosDisponiveis++;
+			hotel.reservas.splice(reservaIndex, 1);
+			console.log(`Reserva de ID ${idReserva} no hotel ${hotel.nome} (ID=${hotel.id}) foi cancelada!`);
+
+			return true;
+		}
 	}
 	return false;
 }
 
 function listarReservas() {
-	return Reserva.reservas.map(reserva => {
-		const hotel = Hotel.hoteis.find(hotel => hotel.id === reserva.idHotel);
-		return {
-			idReserva: reserva.idReserva,
-			hotel: hotel.nome,
-			cidade: hotel.cidade,
-			nomeCliente: reserva.nomeCliente
-		};
-	});
+	reservas = {}
+	for (const hotel of Hotel.hoteis) {
+		reservas[hotel.nome] = [];
+		for (const reserva of hotel.reservas) {
+			reservas[hotel.nome].push(reserva);
+		}
+	}
+	return reservas;
+}
+
+function checkIn(idReserva) {
+	const reservaIndex = Reserva.reservas.findIndex(reserva => reserva.idReserva === idReserva);
+	if (reservaIndex !== -1) {
+
+	}
 }
 
 
-adicionarHotel(1, "Hotel A", "São Paulo", 2);
-adicionarHotel(2, "Hotel B", "Rio de Janeiro", 20);
-adicionarHotel(3, "Hotel C", "Rio de Janeiro", 40);
+let idHotel1 = adicionarHotel("Hotel A", "São Paulo", 2);
+let idHotel2 = adicionarHotel("Hotel B", "Rio de Janeiro", 20);
+let idHotel3 = adicionarHotel("Hotel C", "Rio de Janeiro", 40);
 
-fazerReserva(1, 1, "Cliente A");
-fazerReserva(2, 1, "Cliente B");
-fazerReserva(5, 1, "Cliente E");
-fazerReserva(3, 2, "Cliente C");
-fazerReserva(4, 3, "Cliente D");
+
+// console.log(`${Hotel.hoteis[0].id}`);
+// console.log(`${Hotel.hoteis[1].id}`);
+
+let idReserva1 = fazerReserva(0, "Cliente A");
+let idReserva2 = fazerReserva(0, "Cliente B");
+let idReserva3 = fazerReserva(0, "Cliente E");
+let idReserva4 = fazerReserva(1, "Cliente C");
+let idReserva5 = fazerReserva(2, "Cliente D");
 
 console.log(listarReservas());
 
 // console.log(`${Hotel.hoteis}`);
 
-cancelarReserva(2);
-fazerReserva(5, 1, "Cliente E");
+cancelarReserva(idReserva2);
 
-listarVagasDisponiveisCidade("Rio de Janeiro")
+let idReserva6 = fazerReserva(0, "Cliente E");
+
+console.log(listarReservas());
+// fazerReserva(5, 1, "Cliente E");
+
+listarVagasDisponiveisCidade("Rio de Janeiro");
+listarVagasDisponiveisCidade("São Paulo");
+
+console.log(`${encontrarHotelPorId(idHotel1).nome}`);
 
 // for (const iterator of buscarHoteisPorCidade("Rio de Janeiro")) {
-	// console.log(`${iterator.nome}`);
+// console.log(`${iterator.nome}`);
 // }
 // console.log(`${buscarHoteisPorCidade("Rio de Janeiro")}`);
 

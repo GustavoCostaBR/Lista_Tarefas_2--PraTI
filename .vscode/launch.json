@@ -3,11 +3,12 @@
 
 
 
+
 		{
 			"type": "node",
 			"name": "Run Current File",
 			"request": "launch",
-			"program": "${workspaceFolder}\\Exercicio49.js",
+			"program": "${workspaceFolder}\\Exercicio50.js",
 			"console": "integratedTerminal"
 		}
 	]
