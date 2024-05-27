@@ -44,11 +44,26 @@ function verificarAcertos(gabarito, respostas) {
 	return acertos;
 }
 
+function preencherSemRepeticao(vetor, tamanho) {
+	let count = 0;
+	do {
+		let repostaAtual = receberEntradaInteira(`Resposta ${count + 1}: `);
+		if (vetor.includes(repostaAtual)) {
+			console.log("Número repetido, informe outro");
+			continue;
+		}
+		vetor.push(repostaAtual);
+		count++;
+	} while (vetor.length < tamanho);
+	return vetor;
+}
+
+
 function fazerCartilha(mensagem, NUMERODEELEMENTOS, respostas) {
 	console.log(mensagem);
-	for (let i = 0; i < NUMERODEELEMENTOS; i++) {
-		respostas.push(receberEntradaInteira(`Resposta ${i + 1}: `, LIMITENUMEROAPOSTAVEL));
-	}
+
+	respostas = preencherSemRepeticao(respostas, NUMERODEELEMENTOS);
+	respostas.sort((a, b) => a - b);
 }
 
 function verificarApostadores(NUMERODEELEMENTOS, NUMERODEAPOSTADORES, LIMITENUMEROAPOSTAVEL) {

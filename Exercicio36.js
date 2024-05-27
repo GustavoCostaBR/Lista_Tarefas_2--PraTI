@@ -36,23 +36,39 @@ function receberEntradaInteira(mensagem, limite) {
 
 function verificarAcertos(gabarito, respostas) {
 	let acertos = 0;
-	for (let i = 0; i < gabarito.length; i++) {
-		if (gabarito[i] === respostas[i]) {
+
+	for (let i = 0; i < respostas.length; i++) {
+		if (gabarito.includes(respostas[i])) {
 			acertos++;
 		}
 	}
 	return acertos;
 }
 
+function preencherSemRepeticao(vetor, tamanho) {
+	let count = 0;
+	do {
+		let repostaAtual = receberEntradaInteira(`Resposta ${count + 1}: `);
+		if (vetor.includes(repostaAtual)) {
+			console.log("Número repetido, informe outro");
+			continue;
+		}
+		vetor.push(repostaAtual);
+		count++;
+	} while (vetor.length < tamanho);
+	return vetor;
+}
+
+
 function fazerCartilha(mensagem, NUMERODEELEMENTOS, respostas) {
 	console.log(mensagem);
-	for (let i = 0; i < NUMERODEELEMENTOS; i++) {
-		respostas.push(receberEntradaInteira(`Resposta ${i + 1}: `));
-	}
+
+	respostas = preencherSemRepeticao(respostas, NUMERODEELEMENTOS);
+	respostas.sort((a, b) => a - b);
 }
 
 function verificarApostadores(NUMERODEELEMENTOS, NUMERODEAPOSTADORES) {
-	const gabarito = [];
+	let gabarito = [];
 
 	fazerCartilha("Informe o gabarito de respostas: ", NUMERODEELEMENTOS, gabarito);
 
